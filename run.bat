@@ -1,6 +1,6 @@
 @echo off
 echo Starting Digital Safety Assistant...
-echo Access the app at: http://localhost:8000
+echo Access the app at: http://localhost:8000/index.html
 echo Press Ctrl+C to stop the server
 echo.
 

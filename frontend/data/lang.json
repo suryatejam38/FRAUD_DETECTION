@@ -8,14 +8,22 @@
     "headline": "Check if a message is a scam", "subheadline": "Paste an SMS/WhatsApp message or upload a screenshot.",
     "pastePlaceholder": "Paste SMS or Message Text Here…", "charCount": "Characters:", "analyze": "Analyze Message", "speak": "Speak Message",
     "stopListening": "Stop Listening", "uploadOCR": "Upload Screenshot (OCR)", "tip": "Tip: Never share OTP or UPI PIN.",
+    "login": "Login", "loginTitle": "User Login", "nameLabel": "Full Name", "nameHelper": "e.g., John Doe",
+    "emailLabel": "Email", "emailHelper": "e.g., john@example.com", "mobileLabel": "Mobile Number", "mobileHelper": "10-digit number without country code",
+    "loginSubmit": "Login", "passwordLabel": "Password", "passwordHelper": "At least 6 characters", "invalidPassword": "Password must be at least 6 characters", "emailOrMobileRequired": "Please provide either an email address or mobile number",
     "trust1": "Explainable", "trust2": "Fast", "trust3": "Rural Friendly", "trySample": "Try sample scams:",
     "scamProb": "Scam Probability", "riskLevel": "Risk Level", "fraudType": "Fraud Type Detected", "highlightedMsg": "Highlighted Message",
     "whyFlagged": "Why this was flagged", "scoreBreakdown": "Score breakdown", "preventive": "Preventive Guidance", "doNow": "Do now checklist",
     "emergency": "Emergency Help", "call1930": "Call Cybercrime Helpline: 1930", "reportOnline": "Report on cybercrime.gov.in",
     "emergencyNote": "If money is deducted, act immediately.", "copyShare": "Copy / Share Report", "copyReport": "Copy Report", "share": "Share",
     "download": "Download Report", "analyzeAnother": "Analyze Another Message", "saveHistory": "Save to History",
-    "awarenessTitle": "Awareness / Learn", "historyTitle": "History & Trending", "copied": "Copied!", "saved": "Saved!",
-    "noHistory": "No history yet. Analyze messages to see them here.", "view": "View", "trendingScam": "Trending Scam"
+    "awarenessTitle": "Awareness / Learn", "historyTitle": "History", "copied": "Copied!", "saved": "Saved!",
+    "noHistory": "No history yet. Analyze messages to see them here.", "view": "View", "trendingScam": "Trending Scam",
+    "trendingUpiTab": "Trending UPI Scams", "commonScamsTab": "Common Scams", "scamVsLegitTab": "Scam vs Legit", "safetyTipsTab": "Safety Tips",
+    "dragDrop": "Drag & Drop Screenshot Here", "dragDropOr": "or click to browse",
+    "clearHistory": "Clear History", "deleteItem": "Delete", "confirmClear": "Are you sure you want to delete all history? This cannot be undone.", "itemDeleted": "Item deleted", "historyCleared": "History cleared",
+    "reportNumber": "Report Number", "numberReported": "Thank you! This number has been reported as spam.", "loginToReport": "Please login to report spam numbers",
+    "login": "Login", "loginTitle": "User Login", "nameLabel": "Full Name", "nameHelper": "e.g., John Doe", "emailLabel": "Email", "emailHelper": "e.g., john@example.com", "mobileLabel": "Mobile Number", "mobileHelper": "10-digit number without country code", "loginSubmit": "Login"
   },
   "te": {
     "title": "డిజిటల్ భద్రతా సహాయి", "langLabel": "భాష", "helpTitle": "ఎలా ఉపయోగించాలి",
@@ -33,8 +41,15 @@
     "call1930": "సైబర్ క్రైమ్ హెల్‌లైన్: 1930 కు కాల్ చేయండి", "reportOnline": "cybercrime.gov.in లో నివేదించండి",
     "emergencyNote": "డబ్బు తీసివేస్తే, వెంటనే చర్య తీసుకోండి.", "copyShare": "రిపోర్ట్ కాపీ / భాగస్వామ్యం", "copyReport": "రిపోర్ట్ కాపీ చేయండి",
     "share": "భాగస్వామ్యం చేయండి", "download": "రిపోర్ట్ డౌన్‌లోడ్ చేయండి", "analyzeAnother": "మరొక సందేశాన్ని విశ్లేషించండి",
-    "saveHistory": "చరిత్రలో సేవ్ చేయండి", "awarenessTitle": "విచారణ / నేర్చుకోండి", "historyTitle": "చరిత్ర మరియు ధోరణి",
-    "copied": "కాపీ చేయబడింది!", "saved": "సేవ్ చేయబడింది!", "noHistory": "ఇంకా చరిత్ర లేదు.", "view": "వీక్షించండి", "trendingScam": "ధోరణి స్కామ్"
+    "saveHistory": "చరిత్రలో సేవ్ చేయండి", "awarenessTitle": "విచారణ / నేర్చుకోండి", "historyTitle": "చరిత్ర",
+    "copied": "కాపీ చేయబడింది!", "saved": "సేవ్ చేయబడింది!", "noHistory": "ఇంకా చరిత్ర లేదు.", "view": "వీక్షించండి", "trendingScam": "ధోరణి స్కామ్",
+    "trendingUpiTab": "ధోరణి UPI స్కామ్‌లు", "commonScamsTab": "సాధారణ స్కామ్‌లు", "scamVsLegitTab": "స్కామ్ vs చట్టబద్ధ", "safetyTipsTab": "సురక్షత చిట్కాలు",
+    "dragDrop": "స్క్రీన్‌షాట్ ఇక్కడ డ్రాగ్ & డ్రాప్ చేయండి", "dragDropOr": "లేదా బ్రౌజ్ చేయడానికి క్లిక్ చేయండి",
+    "clearHistory": "చరిత్ర సుమారు", "deleteItem": "తొలగించు", "confirmClear": "మీరు ఖచ్చితంగా అన్ని చరిత్ర తొలగించాలనుకుంటున్నారా? ఇది రద్దు చేయబడదు.", "itemDeleted": "అంశం తొలగించబడింది", "historyCleared": "చరిత్ర సభ",
+    "reportNumber": "నంబర్ నివేదించండి", "numberReported": "ధన్యవాదాలు! ఈ నంబర్ స్పామ్‌గా నివేదించబడింది.", "loginToReport": "స్పామ్ నంబర్‌లను నివేదించడానికి దయచేసి లాగిన్ చేయండి",
+    "login": "లాగిన్", "loginTitle": "వినియోగదారు లాగిన్", "nameLabel": "పూర్తి పేరు", "nameHelper": "ఉదా., జాన్ డో",
+    "emailLabel": "ఇమెయిల్", "emailHelper": "ఉదా., john@example.com", "mobileLabel": "మొబైల్ నంబర్", "mobileHelper": "దేశ కోడ్ లేకుండా 10-అంకెల సంఖ్య",
+    "loginSubmit": "లాగిన్", "passwordLabel": "పాస్‌వర్డ్", "passwordHelper": "అన్నతో ఠదా 6 అంకేలు", "invalidPassword": "పాస్‌వర్డ్ అన్నతో నిమనంగా 6 అంకేలు మండి", "emailOrMobileRequired": "దయచేసి ఇమెయిల్ లేదా మొబైల్ నంబర్‌ను అందించండి"
   },
   "hi": {
     "title": "डिजिटल सुरक्षा सहायक", "langLabel": "भाषा", "helpTitle": "उपयोग कैसे करें",
@@ -51,8 +66,15 @@
     "call1930": "साइबर क्राइम हेल्पलाइन कॉल करें: 1930", "reportOnline": "cybercrime.gov.in पर रिपोर्ट करें",
     "emergencyNote": "अगर पैसा काट लिया गया तो तुरंत कार्रवाई करें.", "copyShare": "रिपोर्ट कॉपी / शेयर", "copyReport": "रिपोर्ट कॉपी करें",
     "share": "शेयर करें", "download": "रिपोर्ट डाउनलोड करें", "analyzeAnother": "दूसरा मैसेज विश्लेषण करें", "saveHistory": "इतिहास में सेव करें",
-    "awarenessTitle": "जागरूकता / सीखें", "historyTitle": "इतिहास और ट्रेंडिंग", "copied": "कॉपी किया!", "saved": "सेव हो गया!",
-    "noHistory": "अभी इतिहास नहीं।", "view": "देखें", "trendingScam": "ट्रेंडिंग स्कैम"
+    "awarenessTitle": "जागरूकता / सीखें", "historyTitle": "इतिहास", "copied": "कॉपी किया!", "saved": "सेव हो गया!",
+    "noHistory": "अभी इतिहास नहीं।", "view": "देखें", "trendingScam": "ट्रेंडिंग स्कैम",
+    "trendingUpiTab": "ट्रेंडिंग UPI स्कैम", "commonScamsTab": "सामान्य स्कैम", "scamVsLegitTab": "स्कैम बनाम असली", "safetyTipsTab": "सुरक्षा सुझाव",
+    "dragDrop": "स्क्रीनशॉट यहाँ ड्रैग और ड्रॉप करें", "dragDropOr": "या ब्राउज़ करने के लिए क्लिक करें",
+    "clearHistory": "इतिहास मिटाएं", "deleteItem": "हटाएं", "confirmClear": "क्या आप निश्चित हैं कि आप सभी इतिहास हटाना चाहते हैं? यह पूर्ववत नहीं किया जा सकता।", "itemDeleted": "आइटम हटाया गया", "historyCleared": "इतिहास साफ हो गया",
+    "reportNumber": "संख्या की रिपोर्ट करें", "numberReported": "धन्यवाद! इस नंबर को स्पाम के रूप में रिपोर्ट कर दिया गया है।", "loginToReport": "स्पाम नंबर की रिपोर्ट करने के लिए कृपया लॉगिन करें",
+    "login": "लॉगिन", "loginTitle": "उपयोगकर्ता लॉगिन", "nameLabel": "पूरा नाम", "nameHelper": "उदा., जॉन डो",
+    "emailLabel": "ईमेल", "emailHelper": "उदा., john@example.com", "mobileLabel": "मोबाइल नंबर", "mobileHelper": "देश कोड के बिना 10-अंकीय संख्या",
+    "loginSubmit": "लॉगिन", "passwordLabel": "पैसवर्ड", "passwordHelper": "कम से कम 6 अक्षर", "invalidPassword": "से कतदे 6 अक्षर लंबा लॉगइन होता है", "emailOrMobileRequired": "कृपया ईमेल पते या मोबाइल नंबर प्रदान करें"
   },
   "ta": {
     "title": "டிஜிட்டல் பாதுகாப்பு உதவியாளர்", "langLabel": "மொழி", "helpTitle": "எப்படி பயன்படுத்துவது", 
@@ -70,7 +92,14 @@
     "reportOnline": "cybercrime.gov.in இல் புகாரளிக்கவும்", "emergencyNote": "பணம் செலவழித்தால் உடனடியாக நடவடிக்கை எடுக்கவும்.", 
     "copyShare": "பிரதியை நகலெடுக்கவும் / பகிரவும்", "copyReport": "பிரதியை நகலெடு", "share": "பகிர்", "download": "பிரதி பதிவிறக்கு", 
     "analyzeAnother": "மற்ற செய்தியை பகுப்பாய்வு செய்", "saveHistory": "வரலாற்றில் சேமிக்கவும்", "awarenessTitle": "விழிப்புணர்வு / கற்றுக்கொள்ளுங்கள்", 
-    "historyTitle": "வரலாறு மற்றும் போக்கு", "copied": "நகலெடுக்கப்பட்டது!", "saved": "சேமிக்கப்பட்டது!", "noHistory": "இதுவரை வரலாறு இல்லை.", "view": "காண்க", "trendingScam": "போக்கு மோசடி"
+    "historyTitle": "வரலாறு", "copied": "நகலெடுக்கப்பட்டது!", "saved": "சேமிக்கப்பட்டது!", "noHistory": "இதுவரை வரலாறு இல்லை.", "view": "காண்க", "trendingScam": "போக்கு மோசடி",
+    "trendingUpiTab": "போக்கு UPI மோசடி", "commonScamsTab": "பொதுவான மோசடி", "scamVsLegitTab": "மோசடி vs சட்டபூர்வம்", "safetyTipsTab": "பாதுகாப்பு குறிப்புகள்",
+    "dragDrop": "திரைப்பிடிப்பை இங்கே இழுத்து விடவும்", "dragDropOr": "அல்லது உலாவ கிளிக் செய்யவும்",
+    "clearHistory": "வரலாற்றை அழிக்கவும்", "deleteItem": "அழிக்கவும்", "confirmClear": "நீங்கள் உண்மையில் அனைத்து வரலாற்றையும் நீக்க விரும்புகிறீர்களா? இதை மீண்டும் செய்ய முடியாது.", "itemDeleted": "உருப்படி நீக்கப்பட்டது", "historyCleared": "வரலாறு அழிக்கப்பட்டது",
+    "reportNumber": "எண்ணை புகாரளிக்கவும்", "numberReported": "நன்றி! இந்த எண் ஸ்பாமாக புகாரளிக்கப்பட்டுள்ளது.", "loginToReport": "ஸ்பாம் எண்களை புகாரளிக்க கிருபையுடன் உள்நுழைக",
+    "login": "உள்நுழைக", "loginTitle": "பயனர் உள்நுழைவு", "nameLabel": "முழு பெயர்", "nameHelper": "எ.கா., ஜான் டோ",
+    "emailLabel": "ஈமெயில்", "emailHelper": "எ.கா., john@example.com", "mobileLabel": "மொபைல் எண்", "mobileHelper": "நாடு கோடு இல்லாமல் 10-இலக்க எண்",
+    "loginSubmit": "உள்நுழைக", "passwordLabel": "எர்ட்ஜி ஜணபடு", "passwordHelper": "அண்டு 6 அக்கரன் அல்ரு", "invalidPassword": "அண்டு 6 அக்கரன் அணமாகதொக இருக்க வேண்டும்", "emailOrMobileRequired": "தயவு செய்து ஈமெயில் முகவரி அல்லது மொபைல் நம்பரை வழங்கவும்"
   },
   "kn": {
     "title": "ಡಿಜಿಟಲ್ ಭದ್ರತಾ ಸಹಾಯಕ", "langLabel": "ಭಾಷೆ", "helpTitle": "ಬಳಸುವುದು ಹೇಗೆ", 
@@ -87,7 +116,14 @@
     "doNow": "ಈಗ ಮಾಡಿ", "emergency": "ತುರ್ತು ಸಹಾಯ", "call1930": "ಸೈಬರ್ ಕ್ರೈಮ್ ಹೆಲ್ಪ್‌ಲೈನ್: 1930", "reportOnline": "cybercrime.gov.in ನಲ್ಲಿ ರಿಪೋರ್ಟ್ ಮಾಡಿ", 
     "emergencyNote": "ಹಣ ಕಡಿತವಾದರೆ ತಕ್ಷಣ ನಡವಡಿಕೆ ತೆಗೆದುಕೊಳ್ಳಿ.", "copyShare": "ರಿಪೋರ್ಟ್ ನಕಲಿಸಿ / ಹಂಚಿಕೊಳ್ಳಿ", "copyReport": "ರಿಪೋರ್ಟ್ ನಕಲಿಸಿ", "share": "ಹಂಚಿಕೊಳ್ಳಿ", 
     "download": "ರಿಪೋರ್ಟ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ", "analyzeAnother": "ಇತರ ಸಂದೇಶವನ್ನು ವಿಶ್ಲೇಷಿಸಿ", "saveHistory": "ಇತಿಹಾಸದಲ್ಲಿ ಉಳಿಸಿ", "awarenessTitle": "ವಿಚಾರಣೆ / ಕಲಿಯಿರಿ", 
-    "historyTitle": "ಇತಿಹಾಸ ಮತ್ತು ಪ್ರವೃತ್ತಿ", "copied": "ನಕಲಿಸಲಾಗಿದೆ!", "saved": "ಉಳಿಸಲಾಗಿದೆ!", "noHistory": "ಇನ್ನೂ ಇತಿಹಾಸವಿಲ್ಲ.", "view": "ನೋಡಿ", "trendingScam": "ಪ್ರವೃತ್ತಿ ಸ್ಕ್ಯಾಮ್"
+    "historyTitle": "ಇತಿಹಾಸ", "copied": "ನಕಲಿಸಲಾಗಿದೆ!", "saved": "ಉಳಿಸಲಾಗಿದೆ!", "noHistory": "ಇನ್ನೂ ಇತಿಹಾಸವಿಲ್ಲ.", "view": "ನೋಡಿ", "trendingScam": "ಪ್ರವೃತ್ತಿ ಸ್ಕ್ಯಾಮ್",
+    "trendingUpiTab": "ಪ್ರವೃತ್ತಿ UPI ಸ್ಕ್ಯಾಮ್‌ಗಳು", "commonScamsTab": "ಸಾಮಾನ್ಯ ಸ್ಕ್ಯಾಮ್‌ಗಳು", "scamVsLegitTab": "ಸ್ಕ್ಯಾಮ್ vs ನ್ಯಾಯಸಮ್ಮತ", "safetyTipsTab": "ಸುರಕ್ಷತೆ ಸುಳಿವುಗಳು",
+    "dragDrop": "ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ಇಲ್ಲಿ ಡ್ರಾಗ್ ಮತ್ತು ಡ್ರಾಪ್ ಮಾಡಿ", "dragDropOr": "ಅಥವಾ ಬ್ರೌಸ್ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ",
+    "clearHistory": "ಪೂರ್ವಾಪೇಕ್ಷೆ ಸುಬಣ್ಣ", "deleteItem": "ಅಳಿಸುವುದು", "confirmClear": "ನೀವು ನಿಜವಾಗಿಯೂ ಎಲ್ಲಾ ಪೂರ್ವಾಪೇಕ್ಷೆ ಅಳಿಸಲು ಬಯಸುತ್ತೀರಾ? ಇದನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗುವುದಿಲ್ಲ.", "itemDeleted": "ಹೆಚ್ಚಳ ಅಳಿಸಲಾಗಿದೆ", "historyCleared": "ಪೂರ್ವಾಪೇಕ್ಷೆ ತೆರವುಗೊಳಿಸಲಾಗಿದೆ",
+    "reportNumber": "ಸಂಖ್ಯೆ ವರದಿ ಮಾಡಿ", "numberReported": "ಧನ್ಯವಾದ! ಈ ಸಂಖ್ಯೆಯನ್ನು ಸ್ಪ್ಯಾಮ್ ಆಗಿ ವರದಿ ಮಾಡಲಾಗಿದೆ.", "loginToReport": "ಸ್ಪ್ಯಾಮ್ ಸಂಖ್ಯೆಗಳನ್ನು ವರದಿ ಮಾಡಲು ದಯವಿಟ್ಟು ಲಾಗಿನ್ ಮಾಡಿ",
+    "login": "ಲಾಗಿನ್", "loginTitle": "ಬಳಕೆದಾರ ಲಾಗಿನ್", "nameLabel": "ಪೂರ್ಣ ಹೆಸರು", "nameHelper": "ಪೂರ್ವ: ಜಾನ್ ಡೋ",
+    "emailLabel": "ಇಮೇಲ್", "emailHelper": "ಪೂರ್ವ: john@example.com", "mobileLabel": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ", "mobileHelper": "ದೇಶ ಕೋಡ್ ಇಲ್ಲದೆ 10-ಅಂಕೆ ಸಂಖ್ಯೆ",
+    "loginSubmit": "ಲಾಗಿನ್", "passwordLabel": "ಗಹ್ಯಸ್ಯರ್", "passwordHelper": "ಕಡಿಮೆ 6 ಅಂಕೆ", "invalidPassword": "ಗಹ್ಯಸ್ಯರ್ ಕಡಿಮೆ 6 ಅಂಕೆ ಇರಿಗதೊಳಪಾದಿ", "emailOrMobileRequired": "ದಯವಿಟ್ಟು ಇಮೇಲ್ ವಿಳಾಸ ಅಥವಾ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಒದಗಿಸಿ"
   },
   "ml": {
     "title": "ഡിജിറ്റൽ സുരക്ഷാ സഹായി", "langLabel": "ഭാഷ", "helpTitle": "എങ്ങനെ ഉപയോഗിക്കാം", 
@@ -104,7 +140,14 @@
     "doNow": "ഇപ്പോൾ ചെയ്യുക", "emergency": "അടിയന്തിര സഹായം", "call1930": "സൈബർ ക്രൈം ഹെൽപ്പ്‌ലൈൻ: 1930", "reportOnline": "cybercrime.gov.in-ൽ റിപ്പോർട്ട് ചെയ്യുക", 
     "emergencyNote": "പണം കിഴിവു ചെയ്യപ്പെട്ടാൽ ഉടൻ പ്രവർത്തിക്കുക.", "copyShare": "റിപ്പോർട്ട് കോപ്പി / പങ്കിടുക", "copyReport": "റിപ്പോർട്ട് കോപ്പി ചെയ്യുക", "share": "പങ്കിടുക", 
     "download": "റിപ്പോർട്ട് ഡൗൺലോഡ് ചെയ്യുക", "analyzeAnother": "മറ്റൊരു സന്ദേശം വിശകലനം ചെയ്യുക", "saveHistory": "ചരിത്രത്തിൽ സംരക്ഷിക്കുക", "awarenessTitle": "അവബോധം / പഠിക്കുക", 
-    "historyTitle": "ചരിത്രവും ട്രെൻഡും", "copied": "കോപ്പി ചെയ്തു!", "saved": "സംരക്ഷിച്ചു!", "noHistory": "ഇതുവരെ ചരിത്രമില്ല.", "view": "കാണുക", "trendingScam": "ട്രെൻഡിംഗ് സ്കാം"
+    "historyTitle": "ചരിത്രം", "copied": "കോപ്പി ചെയ്തു!", "saved": "സംരക്ഷിച്ചു!", "noHistory": "ഇതുവരെ ചരിത്രമില്ല.", "view": "കാണുക", "trendingScam": "ട്രെൻഡിംഗ് സ്കാം",
+    "trendingUpiTab": "ട്രെൻഡിംഗ് UPI സ്കാമുകൾ", "commonScamsTab": "സാധാരണ സ്കാമുകൾ", "scamVsLegitTab": "സ്കാം vs ന്യായസാധ്യം", "safetyTipsTab": "സുരക്ഷാ നുറുങ്ങുകൾ",
+    "dragDrop": "സ്ക്രീൻഷോട്ട് ഇവിടെ ഡ്രാഗ് & ഡ്രോപ്പ് ചെയ്യുക", "dragDropOr": "അല്ലെങ്കിൽ ബ്രൗസ് ചെയ്യാൻ ക്ലിക്ക് ചെയ്യുക",
+    "clearHistory": "ചരിത്രം മായ്ക്കുക", "deleteItem": "ഉണ്ടാക്കുക", "confirmClear": "നിങ്ങൾ തീർച്ചയായും എല്ലാ ചരിത്രവും ഉണ്ടാക്കാൻ ആഗ്രഹിക്കുന്നുണ്ടോ? ഇത് പൂർവ്വാവസ്ഥയിലാക്കാൻ കഴിയില്ല.", "itemDeleted": "ഇനം ഉണ്ടാക്കിയത്", "historyCleared": "ചരിത്രം മായ്ച്ചിരിക്കുന്നു",
+    "reportNumber": "നമ്പർ റിപ്പോർട്ട് ചെയ്യുക", "numberReported": "നന്ദി! ഈ നമ്പർ സ്പാം ആയി റിപ്പോർട്ട് ചെയ്തിരിക്കുന്നു.", "loginToReport": "സ്പാം നമ്പരുകൾ റിപ്പോർട്ട് ചെയ്യാൻ കൃപയാ ലോഗിൻ ചെയ്യുക",
+    "login": "ലോഗിൻ", "loginTitle": "ഉപയോക്താ ലോഗിൻ", "nameLabel": "പൂർണ്ണ നാമം", "nameHelper": "ഉദാ., ജോൻ ഡോ",
+    "emailLabel": "ഇമെയിൽ", "emailHelper": "ഉദാ., john@example.com", "mobileLabel": "മൊബൈൽ നമ്പർ", "mobileHelper": "രാജ്യ കോഡ് ഇല്ലാതെ 10-അക്ക നമ്പർ",
+    "loginSubmit": "ലോഗിൻ", "passwordLabel": "പാസ്‌വാർඟ്", "passwordHelper": "അതിനായലും 6 അക്ഷരങ്ങൽ", "invalidPassword": "പാസ്‌വാർඟ് അതിനായലും 6 അക്ഷരങ്ങൽ ഇരിക്കാണവാനി", "emailOrMobileRequired": "ദയവായി ഇമെയിൽ വിലാസം അല്ലെങ്കിൽ മൊബൈൽ നമ്പർ നൽകുക"
   },
   "bn": {
     "title": "ডিজিটাল সুরক্ষা সহায়ক", "langLabel": "ভাষা", "helpTitle": "কিভাবে ব্যবহার করবেন", 
@@ -121,7 +164,14 @@
     "call1930": "সাইবার ক্রাইম হেল্পলাইন: 1930", "reportOnline": "cybercrime.gov.in এ রিপোর্ট করুন", "emergencyNote": "টাকা কেটে নিলে সাথে সাথে ব্যবস্থা নিন.", 
     "copyShare": "রিপোর্ট কপি / শেয়ার করুন", "copyReport": "রিপোর্ট কপি করুন", "share": "শেয়ার করুন", "download": "রিপোর্ট ডাউনলোড করুন", 
     "analyzeAnother": "অন্য বার্তা বিশ্লেষণ করুন", "saveHistory": "ইতিহাসে সংরক্ষণ করুন", "awarenessTitle": "সচেতনতা / শিখুন", 
-    "historyTitle": "ইতিহাস এবং ট্রেন্ডিং", "copied": "কপি হয়েছে!", "saved": "সংরক্ষিত!", "noHistory": "এখনো ইতিহাস নেই.", "view": "দেখুন", "trendingScam": "ট্রেন্ডিং স্ক্যাম"
+    "historyTitle": "ইতিহাস", "copied": "কপি হয়েছে!", "saved": "সংরক্ষিত!", "noHistory": "এখনো ইতিহাস নেই.", "view": "দেখুন", "trendingScam": "ট্রেন্ডিং স্ক্যাম",
+    "trendingUpiTab": "ট্রেন্ডিং UPI স্ক্যাম", "commonScamsTab": "সাধারণ স্ক্যাম", "scamVsLegitTab": "স্ক্যাম vs বৈধ", "safetyTipsTab": "সুরক্ষা টিপস",
+    "dragDrop": "স্ক্রিনশট এখানে ড্র্যাগ ও ড্রপ করুন", "dragDropOr": "অথবা ব্রাউজ করতে ক্লিক করুন",
+    "clearHistory": "ইতিহাস সাফ করুন", "deleteItem": "মুছে ফেলুন", "confirmClear": "আপনি কি নিশ্চিত যে আপনি সমস্ত ইতিহাস মুছতে চান? এটি পূর্বাবস্থায় ফেরানো যাবে না।", "itemDeleted": "আইটেম মুছে ফেলা হয়েছে", "historyCleared": "ইতিহাস সাফ হয়েছে",
+    "reportNumber": "নম্বর রিপোর্ট করুন", "numberReported": "ধন্যবাদ! এই নম্বর স্প্যাম হিসাবে রিপোর্ট করা হয়েছে।", "loginToReport": "স্প্যাম নম্বর রিপোর্ট করতে দয়া করে লগইন করুন",
+    "login": "লগইন", "loginTitle": "ব্যবহারকারী লগইন", "nameLabel": "পূর্ণ নাম", "nameHelper": "উদা., জন ডো",
+    "emailLabel": "ইমেল", "emailHelper": "উদা., john@example.com", "mobileLabel": "মোবাইল নম্বর", "mobileHelper": "দেশ কোড ছাড়াই 10-অঙ্কের সংখ্যা",
+    "loginSubmit": "লগইন", "passwordLabel": "পাসকোড", "passwordHelper": "অন্তত 6টি অক্ষর", "invalidPassword": "পাসকোড অন্তত 6টি অক্ষর হতে হবে", "emailOrMobileRequired": "অনুগ্রহ করে একটি ইমেইল ঠিকানা বা মোবাইল নম্বর প্রদান করুন"
   },
   "mr": {
     "title": "डिजिटल सुरक्षा सहायक", "langLabel": "भाषा", "helpTitle": "कसे वापरावे", 
@@ -138,6 +188,13 @@
     "call1930": "सायबर क्राइम हेल्पलाइन: 1930", "reportOnline": "cybercrime.gov.in वर अहवाल द्या", "emergencyNote": "पैसे कापल्यास लगेच कारवाई करा.", 
     "copyShare": "अहवाल कॉपी / शेअर करा", "copyReport": "अहवाल कॉपी करा", "share": "शेअर करा", "download": "अहवाल डाउनलोड करा", 
     "analyzeAnother": "दुसरा संदेश विश्लेषण करा", "saveHistory": "इतिहासात जतन करा", "awarenessTitle": "जागरूकता / शिका", 
-    "historyTitle": "इतिहास आणि ट्रेंडिंग", "copied": "कॉपी केले!", "saved": "जतन केले!", "noHistory": "अद्याप इतिहास नाही.", "view": "पहा", "trendingScam": "ट्रेंडिंग स्कॅम"
+    "historyTitle": "इतिहास", "copied": "कॉपी केले!", "saved": "जतन केले!", "noHistory": "अद्याप इतिहास नाही.", "view": "पहा", "trendingScam": "ट्रेंडिंग स्कॅम",
+    "trendingUpiTab": "ट्रेंडिंग UPI स्कॅम", "commonScamsTab": "सामान्य स्कॅम", "scamVsLegitTab": "स्कॅम vs वास्तविक", "safetyTipsTab": "सुरक्षा सुझाव",
+    "dragDrop": "स्क्रीनशॉट येथे ड्रॅग आणि ड्रॉप करा", "dragDropOr": "किंवा ब्राउझ करण्यासाठी क्लिक करा",
+    "clearHistory": "इतिहास साफ करा", "deleteItem": "हटवा", "confirmClear": "आप वाकई सभी इतिहास हटाना चाहते हैं? यह रद्द नहीं किया जा सकता।", "itemDeleted": "आइटम हटाया गया", "historyCleared": "इतिहास साफ किया गया",
+    "reportNumber": "नंबर अहवाल द्या", "numberReported": "धन्यवाद! हा नंबर स्पाम म्हणून अहवाल दिला गेला आहे.", "loginToReport": "स्पाम नंबर अहवाल देण्यासाठी कृपया लॉगिन करा",
+    "login": "लॉगिन", "loginTitle": "वापरकर्ता लॉगिन", "nameLabel": "पूर्ण नाव", "nameHelper": "उदा., जॉन डो",
+    "emailLabel": "ईमेल", "emailHelper": "उदा., john@example.com", "mobileLabel": "मोबाइल नंबर", "mobileHelper": "देश कोड व्यतिरिक्त 10-अंक क्रमांक",
+    "loginSubmit": "लॉगिन", "passwordLabel": "गुप्तशब्द", "passwordHelper": "कमीत 6 अक्षर", "invalidPassword": "गुप्तशब्द कमीत 6 अक्षर लंबा असावा", "emailOrMobileRequired": "कृपया ईमेल पता किंवा मोबाइल नंबर द्या"
   }
 }

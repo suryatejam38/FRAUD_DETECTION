@@ -9,6 +9,8 @@ let currentLang = 'en';
 let lastAnalysis = null;
 let analysisHistory = JSON.parse(localStorage.getItem('fraudAnalysisHistory') || '[]');
 let activeRecognition = null;
+let currentCheckMode = 'message'; // 'message' or 'number'
+let darkMode = localStorage.getItem('darkMode') === 'true'; // Load dark mode preference
 
 document.addEventListener('DOMContentLoaded', initApp);
 
@@ -38,6 +40,12 @@ async function initApp() {
     renderAwareness('trendingUpi');
     renderHistory();
     setupEventListeners();
+    
+    // Apply dark mode if enabled
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+      updateThemeButtonIcon();
+    }
 
   } catch (error) {
     console.error("Failed to load application data:", error);
@@ -49,6 +57,10 @@ function t(key) { const lang = LANG[currentLang] || LANG.en || {}; return lang[k
 
 function applyLanguage() {
   const lang = LANG[currentLang] || LANG.en || {};
+  
+  // Update HTML lang attribute
+  document.documentElement.lang = currentLang;
+  
   document.querySelectorAll('[data-lang]').forEach(el => {
     const k = el.getAttribute('data-lang');
     if (lang[k]) el.textContent = lang[k];
@@ -123,17 +135,38 @@ function animateGauge(targetPct, risk, durationMs) {
 
 function showToast(msg) {
   const c = document.getElementById('toastContainer');
+  if (!c) {
+    console.error('Toast container not found');
+    alert(msg); // Fallback
+    return;
+  }
   const toast = document.createElement('div');
   toast.className = 'toast align-items-center border-0 bg-success text-white';
-  toast.innerHTML = `<div class="d-flex"><div class="toast-body">${msg}</div><button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="toast"></button></div>`;
+  toast.setAttribute('role', 'alert');
+  toast.setAttribute('aria-live', 'assertive');
+  toast.setAttribute('aria-atomic', 'true');
+  toast.innerHTML = `<div class="d-flex"><div class="toast-body">${msg}</div><button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="toast" aria-label="Close"></button></div>`;
   c.appendChild(toast);
-  new bootstrap.Toast(toast).show();
+  const bsToast = new bootstrap.Toast(toast, { autohide: true, delay: 3000 });
+  bsToast.show();
   toast.addEventListener('hidden.bs.toast', () => toast.remove());
 }
 
 function runAnalysis() {
+  if (currentCheckMode === 'number') {
+    analyzePhoneNumber();
+    return;
+  }
+  
   const text = document.getElementById('messageInput').value.trim();
-  if (!text) { alert('Please enter a message to analyze.'); return; }
+  if (!text) { 
+    showToast('Please enter a message to analyze.'); 
+    return; 
+  }
+  if (text.length < 10) {
+    showToast('Message too short. Please enter at least 10 characters.');
+    return;
+  }
   const result = mockAnalyze(text);
   lastAnalysis = { text, ...result, timestamp: Date.now() };
   document.getElementById('riskPill').textContent = result.risk === 'safe' ? 'SAFE' : result.risk === 'suspicious' ? 'SUSPICIOUS' : 'HIGH RISK';
@@ -155,33 +188,347 @@ function runAnalysis() {
   document.getElementById('homeSection').style.display = 'none';
   document.getElementById('resultsSection').classList.add('visible');
   document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+  
+  // Auto-save to history
+  saveToHistory();
 }
 
 function renderAwareness(tab) {
   const data = AWARENESS[tab] || AWARENESS.common || [];
   const content = document.getElementById('awarenessContent');
   if (!content) return;
-  if (tab === 'trendingUpi' || tab === 'common') content.innerHTML = '<div class="row g-3">' + data.map(d => `<div class="col-md-6 col-lg-4"><div class="awareness-card"><i class="bi ${d.icon} text-primary fs-4"></i><h6>${d.title}</h6><p class="small mb-1">${d.desc}</p><small class="text-danger">Red flags: ${d.flags.join(', ')}</small></div></div>`).join('') + '</div>';
-  else if (tab === 'vs') content.innerHTML = '<div class="row g-3">' + data.map(d => `<div class="col-md-6 col-lg-4"><div class="awareness-card"><i class="bi ${d.icon} text-danger"></i> <strong>${d.title}</strong><br><i class="bi bi-check-circle text-success"></i> ${d.legit}</div></div>`).join('') + '</div>';
-  else content.innerHTML = '<div class="row g-3">' + data.map(d => `<div class="col-md-6 col-lg-4"><div class="awareness-card"><i class="bi ${d.icon} text-primary fs-4"></i><h6>${d.title}</h6><p class="small mb-0">${d.desc}</p></div></div>`).join('') + '</div>';
+  if (tab === 'trendingUpi' || tab === 'common') content.innerHTML = '<div class="row g-3">' + data.map(d => `<div class="col-md-6 col-lg-4"><div class="awareness-card"><div class="card-content"><i class="bi ${d.icon} text-primary fs-4"></i><h6>${d.title}</h6><p class="small mb-1">${d.desc}</p><small class="text-danger">Red flags: ${d.flags.join(', ')}</small></div></div></div>`).join('') + '</div>';
+  else if (tab === 'vs') content.innerHTML = '<div class="row g-3">' + data.map(d => `<div class="col-md-6 col-lg-4"><div class="awareness-card"><div class="card-content"><i class="bi ${d.icon} text-danger"></i> <strong>${d.title}</strong><br><i class="bi bi-check-circle text-success"></i> ${d.legit}</div></div></div>`).join('') + '</div>';
+  else if (tab === 'tips') content.innerHTML = '<div class="row g-3">' + data.map(d => `<div class="col-md-6 col-lg-4"><div class="awareness-card"><div class="card-content"><i class="bi ${d.icon} text-success fs-4"></i><h6>${d.title}</h6><p class="small mb-0">${d.desc}</p></div></div></div>`).join('') + '</div>';
+  else content.innerHTML = '<div class="row g-3">' + data.map(d => `<div class="col-md-6 col-lg-4"><div class="awareness-card"><div class="card-content"><i class="bi ${d.icon} text-primary fs-4"></i><h6>${d.title}</h6><p class="small mb-0">${d.desc}</p></div></div></div>`).join('') + '</div>';
 }
 
 function renderHistory() {
   const list = document.getElementById('historyList');
+  const clearBtn = document.getElementById('btnClearAllHistory');
   if (!list) return;
   const counts = {}; analysisHistory.forEach(h => { counts[h.text] = (counts[h.text] || 0) + 1; });
-  if (!analysisHistory.length) { list.innerHTML = `<p class="text-center text-muted">${t('noHistory')}</p>`; return; }
+  if (!analysisHistory.length) { list.innerHTML = `<p class="text-center text-muted">${t('noHistory')}</p>`; clearBtn.style.display = 'none'; return; }
+  clearBtn.style.display = 'block';
   list.innerHTML = analysisHistory.map(h => {
     const trending = counts[h.text] >= 3 ? `<span class="trending-badge ms-2">${t('trendingScam')}</span>` : '';
     const ft = FRAUD_TYPES[h.fraudType] || FRAUD_TYPES.others || {label: "Others"};
-    return `<div class="history-item d-flex justify-content-between align-items-center flex-wrap gap-2"><div><span class="badge ${h.score >= 60 ? 'bg-danger' : h.score >= 30 ? 'bg-warning' : 'bg-success'}">${h.score}%</span><strong>${ft.label}</strong>${trending}<div class="small text-muted">${h.text.substring(0, 50)}...</div><small>${h.time}</small></div><button class="btn btn-sm btn-primary" data-id="${h.id}">${t('view')}</button></div>`;
+    return `<div class="history-item d-flex justify-content-between align-items-center flex-wrap gap-2"><div><span class="badge ${h.score >= 60 ? 'bg-danger' : h.score >= 30 ? 'bg-warning' : 'bg-success'}">${h.score}%</span><strong>${ft.label}</strong>${trending}<div class="small text-muted">${h.text.substring(0, 50)}...</div><small>${h.time}</small></div><div class="d-flex gap-2"><button class="btn btn-sm btn-primary" data-id="${h.id}">${t('view')}</button><button class="btn btn-sm btn-danger delete-history-btn" data-id="${h.id}" title="${t('deleteItem') || 'Delete'}"><i class="bi bi-trash3"></i></button></div></div>`;
   }).join('');
-  list.querySelectorAll('button[data-id]').forEach(btn => btn.addEventListener('click', () => { const entry = analysisHistory.find(x => x.id == btn.dataset.id); if (entry?.full) { lastAnalysis = entry.full; document.getElementById('messageInput').value = entry.full.text; document.getElementById('charCount').textContent = entry.full.text.length; runAnalysis(); } }));
+  list.querySelectorAll('button[data-id]:not(.delete-history-btn)').forEach(btn => btn.addEventListener('click', () => { const entry = analysisHistory.find(x => x.id == btn.dataset.id); if (entry?.full) { lastAnalysis = entry.full; document.getElementById('messageInput').value = entry.full.text; document.getElementById('charCount').textContent = entry.full.text.length; runAnalysis(); } }));
+  list.querySelectorAll('.delete-history-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); deleteHistoryItem(btn.dataset.id); }));
+}
+
+function deleteHistoryItem(id) {
+  analysisHistory = analysisHistory.filter(item => item.id != id);
+  try {
+    localStorage.setItem('fraudAnalysisHistory', JSON.stringify(analysisHistory));
+  } catch (e) {
+    console.error('Error saving to localStorage:', e);
+  }
+  renderHistory();
+  showToast(t('itemDeleted') || 'Item deleted');
+}
+
+function clearAllHistory() {
+  const confirmMsg = t('confirmClear') || 'Are you sure you want to delete all history? This cannot be undone.';
+  if (confirm(confirmMsg)) {
+    analysisHistory = [];
+    try {
+      localStorage.setItem('fraudAnalysisHistory', JSON.stringify(analysisHistory));
+    } catch (e) {
+      console.error('Error saving to localStorage:', e);
+    }
+    renderHistory();
+    showToast(t('historyCleared') || 'History cleared');
+  }
+}
+
+// Helper functions for drag and drop
+function preventDefaults(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+function handleDrop(e) {
+  const dt = e.dataTransfer;
+  const files = dt.files;
+  if (files.length > 0) {
+    handleFiles(files);
+  }
+}
+
+function handleFiles(files) {
+  const file = files[0];
+  if (file && file.type.startsWith('image/')) {
+    if (file.size > 5 * 1024 * 1024) {
+      showToast('File too large. Maximum 5MB allowed.');
+      return;
+    }
+    document.getElementById('ocrPreview').textContent = '✓ ' + file.name;
+    document.getElementById('messageInput').value = "URGENT: Your bank account will be frozen. Complete KYC: https://fake-bank-kyc.com. Enter OTP to verify.";
+    document.getElementById('charCount').textContent = document.getElementById('messageInput').value.length;
+    showToast('Image uploaded! OCR simulated.');
+  } else {
+    showToast('Please upload an image file.');
+  }
+}
+
+function saveToHistory() {
+  if (!lastAnalysis) return;
+  try {
+    analysisHistory.unshift({ id: Date.now(), text: lastAnalysis.text.substring(0, 80), score: lastAnalysis.score, fraudType: lastAnalysis.fraudType, full: lastAnalysis, time: new Date().toLocaleString() });
+    analysisHistory = analysisHistory.slice(0, 10);
+    localStorage.setItem('fraudAnalysisHistory', JSON.stringify(analysisHistory));
+    renderHistory();
+  } catch (error) {
+    console.error('Failed to save history:', error);
+  }
+}
+
+function switchCheckMode(mode) {
+  currentCheckMode = mode;
+  
+  // Update button states
+  document.querySelectorAll('.check-mode-btn').forEach(btn => {
+    if (btn.dataset.mode === mode) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  // Show/hide sections
+  const messageSection = document.getElementById('messageSection');
+  const numberSection = document.getElementById('numberSection');
+  const dropZone = document.getElementById('dropZone');
+  const btnSpeak = document.getElementById('btnSpeak');
+  const btnUploadOCR = document.getElementById('btnUploadOCR');
+  const btnAnalyze = document.getElementById('btnAnalyze');
+  const btnReportNumber = document.getElementById('btnReportNumber');
+  const numberInfo = document.getElementById('numberInfo');
+  
+  if (mode === 'message') {
+    messageSection.style.display = 'block';
+    numberSection.style.display = 'none';
+    dropZone.style.display = 'flex';
+    btnSpeak.style.display = 'inline-block';
+    btnUploadOCR.style.display = 'inline-block';
+    if (btnReportNumber) btnReportNumber.style.display = 'none';
+    btnAnalyze.querySelector('span').textContent = 'Analyze Message';
+  } else {
+    messageSection.style.display = 'none';
+    numberSection.style.display = 'block';
+    dropZone.style.display = 'none';
+    btnSpeak.style.display = 'none';
+    btnUploadOCR.style.display = 'none';
+    if (btnReportNumber) btnReportNumber.style.display = 'inline-block';
+    btnAnalyze.querySelector('span').textContent = 'Check Number';
+    numberInfo.innerHTML = 'Checking spam database...';
+    document.getElementById('numberInput').value = '';
+  }
+}
+
+function analyzePhoneNumber() {
+  const phoneNumber = document.getElementById('numberInput').value.trim();
+  if (!phoneNumber) {
+    showToast('Please enter a phone number.');
+    return;
+  }
+  if (!/^\d{10}$/.test(phoneNumber.replace(/[-\s()]/g, ''))) {
+    showToast('Please enter a valid 10-digit phone number.');
+    return;
+  }
+  
+  const result = checkPhoneNumber(phoneNumber);
+  const numberInfo = document.getElementById('numberInfo');
+  if (result.isSpam) {
+    numberInfo.innerHTML = '<span style="color: #dc2626; font-weight: bold;">⚠️ Spam Number Detected</span>';
+  } else {
+    numberInfo.innerHTML = '<span style="color: #059669; font-weight: bold;">✓ Number appears safe</span>';
+  }
+}
+
+function checkPhoneNumber(phoneNumber) {
+  // Mock phone number spam detection
+  const spamNumbers = [
+    '9876543210', '8765432109', '7654321098', '6543210987',
+    '5432109876', '9111111111', '8888888888', '7777777777'
+  ];
+  
+  // Clean the number
+  const cleanNumber = phoneNumber.replace(/\D/g, '').slice(-10);
+  const isSpam = spamNumbers.includes(cleanNumber);
+  
+  return { isSpam, cleanNumber };
+}
+
+function loadUserData() {
+  try {
+    const userData = JSON.parse(localStorage.getItem('suraksha_user'));
+    if (userData && userData.name) {
+      updateLoginButton(userData.name);
+    }
+  } catch (error) {
+    console.error('Error loading user data:', error);
+  }
+}
+
+function updateLoginButton(userName) {
+  const loginBtn = document.getElementById('loginBtn');
+  if (loginBtn) {
+    loginBtn.innerHTML = `<i class="bi bi-person-check-fill"></i> <span>${userName}</span>`;
+    loginBtn.style.backgroundColor = '#10b981';
+    loginBtn.style.borderColor = '#10b981';
+  }
+}
+
+function logoutUser() {
+  localStorage.removeItem('suraksha_user');
+  const loginBtn = document.getElementById('loginBtn');
+  if (loginBtn) {
+    loginBtn.innerHTML = `<i class="bi bi-person-circle"></i> <span data-lang="login">${t('login')}</span>`;
+    loginBtn.style.backgroundColor = '';
+    loginBtn.style.borderColor = '';
+  }
+  showToast('Logged out successfully!');
+}
+
+function updateThemeButtonIcon() {
+  const themeBtn = document.getElementById('themeToogleBtn');
+  if (themeBtn) {
+    if (darkMode) {
+      themeBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    } else {
+      themeBtn.innerHTML = '<i class="bi bi-moon-fill"></i>';
+    }
+  }
+}
+
+function toggleDarkMode() {
+  darkMode = !darkMode;
+  localStorage.setItem('darkMode', darkMode);
+  
+  if (darkMode) {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
+  
+  updateThemeButtonIcon();
 }
 
 function setupEventListeners() {
+  // Mode switching
+  document.getElementById('btnCheckMessage')?.addEventListener('click', () => switchCheckMode('message'));
+  document.getElementById('btnCheckNumber')?.addEventListener('click', () => switchCheckMode('number'));
+  
   document.getElementById('messageInput')?.addEventListener('input', () => { document.getElementById('charCount').textContent = document.getElementById('messageInput').value.length; });
   document.getElementById('btnAnalyze')?.addEventListener('click', runAnalysis);
+
+  // Report number button handler
+  document.getElementById('btnReportNumber')?.addEventListener('click', () => {
+    const userData = JSON.parse(localStorage.getItem('suraksha_user'));
+    if (!userData || !userData.name) {
+      // User not logged in - show login modal
+      showToast(t('loginToReport'));
+      const loginModalEl = document.getElementById('loginModal');
+      if (loginModalEl) {
+        const loginModal = bootstrap.Modal.getOrCreateInstance(loginModalEl);
+        loginModal.show();
+      }
+      return;
+    }
+    
+    // User is logged in - process report
+    const phoneNumber = document.getElementById('numberInput').value.trim();
+    if (!phoneNumber) {
+      showToast('Please enter a phone number to report');
+      return;
+    }
+    
+    if (!/^\d{10}$/.test(phoneNumber.replace(/[-\s()]/g, ''))) {
+      showToast('Please enter a valid 10-digit phone number');
+      return;
+    }
+    
+    // Submit the report (mock implementation)
+    try {
+      const reportData = {
+        number: phoneNumber,
+        reportedBy: userData.name,
+        reportedAt: new Date().toISOString(),
+        reason: 'Spam detected'
+      };
+      
+      // In real scenario, this would be sent to a backend
+      console.log('Report submitted:', reportData);
+      showToast(t('numberReported'));
+      
+      // Clear the input
+      document.getElementById('numberInput').value = '';
+      document.getElementById('numberInfo').textContent = 'Checking spam database...';
+    } catch (error) {
+      console.error('Error reporting number:', error);
+      showToast('Error submitting report. Please try again.');
+    }
+  });
+
+  // Login button handler - toggle login/logout
+  document.getElementById('loginBtn')?.addEventListener('click', (e) => {
+    const userData = JSON.parse(localStorage.getItem('suraksha_user'));
+    if (userData && userData.name) {
+      // User is logged in - show logout confirmation
+      if (confirm(`Logout as ${userData.name}?`)) {
+        logoutUser();
+      }
+    } else {
+      // User is not logged in - show login modal
+      const loginModalEl = document.getElementById('loginModal');
+      if (loginModalEl) {
+        const loginModal = bootstrap.Modal.getOrCreateInstance(loginModalEl);
+        loginModal.show();
+      }
+    }
+  });
+
+  // Theme toggle button handler
+  document.getElementById('themeToogleBtn')?.addEventListener('click', toggleDarkMode);
+
+  // Drag and drop functionality
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('ocrFileInput');
+  
+  if (dropZone && fileInput) {
+    // Prevent default drag behaviors
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, preventDefaults, false);
+      document.body.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    // Highlight drop zone when dragging over it
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, () => dropZone.classList.add('drag-over'), false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, () => dropZone.classList.remove('drag-over'), false);
+    });
+    
+    // Handle dropped files
+    dropZone.addEventListener('drop', handleDrop, false);
+    
+    // Click to browse
+    dropZone.addEventListener('click', () => fileInput.click());
+    
+    // Keyboard accessibility
+    dropZone.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+  }
 
   document.getElementById('btnSpeak')?.addEventListener('click', () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -218,8 +565,9 @@ function setupEventListeners() {
 
   document.getElementById('btnUploadOCR')?.addEventListener('click', () => document.getElementById('ocrFileInput').click());
   document.getElementById('ocrFileInput')?.addEventListener('change', (e) => {
-    const f = e.target.files[0];
-    if (f) { document.getElementById('ocrPreview').textContent = '✓ ' + f.name; document.getElementById('messageInput').value = "URGENT: Your bank account will be frozen. Complete KYC: https://fake-bank-kyc.com. Enter OTP to verify."; document.getElementById('charCount').textContent = document.getElementById('messageInput').value.length; showToast('OCR simulated.'); }
+    if (e.target.files.length > 0) {
+      handleFiles(e.target.files);
+    }
   });
 
   document.querySelectorAll('.chip-sample').forEach(chip => chip.addEventListener('click', () => { document.getElementById('messageInput').value = SAMPLES[chip.dataset.sample] || ''; document.getElementById('charCount').textContent = document.getElementById('messageInput').value.length; }));
@@ -229,22 +577,221 @@ function setupEventListeners() {
     document.getElementById('resultsSection').classList.remove('visible'); document.getElementById('homeSection').style.display = 'block'; document.getElementById('homeSection').scrollIntoView({ behavior: 'smooth' });
   });
 
-  document.getElementById('btnSaveHistory')?.addEventListener('click', () => {
-    if (!lastAnalysis) return;
-    analysisHistory.unshift({ id: Date.now(), text: lastAnalysis.text.substring(0, 80), score: lastAnalysis.score, fraudType: lastAnalysis.fraudType, full: lastAnalysis, time: new Date().toLocaleString() });
-    analysisHistory = analysisHistory.slice(0, 10);
-    localStorage.setItem('fraudAnalysisHistory', JSON.stringify(analysisHistory));
-    showToast(t('saved'));
-    renderHistory();
-  });
 
-  document.getElementById('btnCopyReport')?.addEventListener('click', () => { navigator.clipboard.writeText(document.getElementById('reportText').value); showToast(t('copied')); });
+  document.getElementById('btnClearAllHistory')?.addEventListener('click', clearAllHistory);
+
+  document.getElementById('btnCopyReport')?.addEventListener('click', () => { 
+    const reportText = document.getElementById('reportText').value;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(reportText)
+        .then(() => showToast(t('copied')))
+        .catch(() => {
+          // Fallback: select and copy
+          document.getElementById('reportText').select();
+          document.execCommand('copy');
+          showToast(t('copied'));
+        });
+    } else {
+      // Fallback for older browsers
+      document.getElementById('reportText').select();
+      document.execCommand('copy');
+      showToast(t('copied'));
+    }
+  });
   document.getElementById('btnShareReport')?.addEventListener('click', () => {
     const text = document.getElementById('reportText').value;
     if (navigator.share) { navigator.share({ title: 'Digital Safety Assistant', text, url: window.location.href }).then(() => showToast('Shared!')).catch(() => {}); }
     else { const m = document.createElement('div'); m.className = 'modal fade'; m.innerHTML = '<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5>Share</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><p>Copy the report below and share.</p><textarea class="form-control" rows="8" id="shareReportCopy"></textarea></div></div></div>'; document.body.appendChild(m); m.querySelector('#shareReportCopy').value = text; const bs = bootstrap.Modal.getOrCreateInstance(m); bs.show(); m.addEventListener('hidden.bs.modal', () => { bs.dispose(); m.remove(); }); }
   });
-  document.getElementById('btnDownloadReport')?.addEventListener('click', () => { const a = document.createElement('a'); a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('reportText').value); a.download = 'fraud-report-' + Date.now() + '.txt'; a.click(); showToast('Downloaded.'); });
+  document.getElementById('btnDownloadReport')?.addEventListener('click', () => {
+    if (!lastAnalysis) return;
+    
+    const ft = FRAUD_TYPES[lastAnalysis.fraudType] || FRAUD_TYPES.others;
+    const timestamp = new Date(lastAnalysis.timestamp).toLocaleString();
+    
+    // Create PDF content HTML
+    const pdfContent = `
+      <div style="font-family: Arial, sans-serif; padding: 40px; color: #1e293b; position: relative;">
+        <!-- Watermark -->
+        <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); font-size: 120px; font-weight: bold; color: rgba(220, 38, 38, 0.08); z-index: 0; white-space: nowrap; pointer-events: none;">
+          SURAKSHA
+        </div>
+        
+        <div style="position: relative; z-index: 1;">
+          <!-- Header -->
+          <div style="border-bottom: 3px solid #059669; padding-bottom: 20px; margin-bottom: 30px;">
+            <h1 style="color: #059669; margin: 0; font-size: 32px;">🛡️ SURAKSHA</h1>
+            <p style="color: #666; margin: 5px 0 0 0; font-size: 14px;">Digital Safety Assistant - Fraud Detection Report</p>
+          </div>
+          
+          <!-- Report Metadata -->
+          <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #0ea5e9;">
+            <p style="margin: 5px 0;"><strong>Report Generated:</strong> ${timestamp}</p>
+            <p style="margin: 5px 0;"><strong>Fraud Type Detected:</strong> ${ft.label}</p>
+            <p style="margin: 5px 0;"><strong>Risk Level:</strong> ${lastAnalysis.risk.toUpperCase()}</p>
+          </div>
+          
+          <!-- Key Metrics -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+            <div style="background: linear-gradient(135deg, #fee2e2, #fecaca); padding: 20px; border-radius: 8px; text-align: center;">
+              <div style="font-size: 36px; font-weight: bold; color: #dc2626;">${lastAnalysis.score}%</div>
+              <div style="color: #991b1b; font-weight: bold;">Scam Probability</div>
+            </div>
+            <div style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); padding: 20px; border-radius: 8px; text-align: center;">
+              <div style="font-size: 20px; font-weight: bold; color: #0ea5e9;">${lastAnalysis.confidence}</div>
+              <div style="color: #0369a1; font-weight: bold;">Confidence Level</div>
+            </div>
+          </div>
+          
+          <!-- Analyzed Message -->
+          <div style="margin-bottom: 25px;">
+            <h3 style="color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">📝 Analyzed Message</h3>
+            <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #64748b; word-wrap: break-word;">
+              "${lastAnalysis.text}"
+            </div>
+          </div>
+          
+          <!-- Why Flagged -->
+          <div style="margin-bottom: 25px;">
+            <h3 style="color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">⚠️ Why This Message Was Flagged</h3>
+            <ul style="margin: 0; padding-left: 20px;">
+              ${lastAnalysis.reasons.map(r => `<li style="margin: 8px 0; color: #475569;">${r}</li>`).join('')}
+            </ul>
+          </div>
+          
+          <!-- Risk Breakdown -->
+          <div style="margin-bottom: 25px;">
+            <h3 style="color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">📊 Risk Score Breakdown</h3>
+            ${lastAnalysis.breakdown.map(b => {
+              const barWidth = Math.min(100, (b.pts / 30) * 100);
+              return `
+                <div style="margin: 12px 0;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span style="font-weight: bold; color: #1e293b;">${b.label}</span>
+                    <span style="color: #059669; font-weight: bold;">+${b.pts}/30</span>
+                  </div>
+                  <div style="background: #e2e8f0; height: 8px; border-radius: 4px; overflow: hidden;">
+                    <div style="background: linear-gradient(90deg, #059669, #14b8a6); height: 100%; width: ${barWidth}%; border-radius: 4px;"></div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+          
+          <!-- Safety Tips -->
+          <div style="margin-bottom: 25px;">
+            <h3 style="color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">💡 Safety Tips</h3>
+            <ul style="margin: 0; padding-left: 20px;">
+              ${lastAnalysis.tips.map(tip => `<li style="margin: 8px 0; color: #475569;">${tip}</li>`).join('')}
+            </ul>
+          </div>
+          
+          <!-- Emergency Contact -->
+          <div style="background: linear-gradient(135deg, #fecaca, #fca5a5); padding: 20px; border-radius: 8px; border-left: 4px solid #dc2626; margin-bottom: 25px;">
+            <h3 style="color: #991b1b; margin-top: 0;">🚨 If You Suspect Fraud</h3>
+            <p style="margin: 10px 0; color: #7f1d1d;"><strong>Call Cybercrime Helpline:</strong> <span style="font-size: 18px; font-weight: bold;">1930</span></p>
+            <p style="margin: 10px 0; color: #7f1d1d;"><strong>Report Online:</strong> <span style="font-family: monospace;">cybercrime.gov.in</span></p>
+            <p style="margin: 10px 0; color: #7f1d1d;"><strong>Note:</strong> Never share OTP, PIN, or personal financial information via messages or links.</p>
+          </div>
+          
+          <!-- Footer -->
+          <div style="border-top: 2px solid #e2e8f0; padding-top: 20px; text-align: center; color: #64748b; font-size: 12px;">
+            <p style="margin: 5px 0;">This report is generated by SURAKSHA Digital Safety Assistant</p>
+            <p style="margin: 5px 0;">Keep yourself and your family safe from online fraud</p>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    const element = document.createElement('div');
+    element.innerHTML = pdfContent;
+    
+    const opt = {
+      margin: [10, 10, 10, 10],
+      filename: `fraud-report-${Date.now()}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+    };
+    
+    html2pdf().set(opt).from(element).save();
+    showToast('Report downloaded as PDF!');
+  });
+
+  // Login form handler
+  document.getElementById('loginForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('loginName').value.trim();
+    const email = document.getElementById('loginEmail').value.trim();
+    const mobile = document.getElementById('loginMobile').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+    
+    // Validate name (required)
+    if (!name) {
+      showToast('Please enter your name');
+      return;
+    }
+    
+    // Validate password (required, minimum 6 characters)
+    if (!password) {
+      showToast('Please enter a password');
+      return;
+    }
+    
+    if (password.length < 6) {
+      showToast(t('invalidPassword'));
+      return;
+    }
+    
+    // Check that at least one of email or mobile is provided
+    if (!email && !mobile) {
+      showToast(t('emailOrMobileRequired'));
+      return;
+    }
+    
+    // Validate email format if email is provided
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Please enter a valid email address');
+      return;
+    }
+    
+    // Validate mobile format if mobile is provided
+    if (mobile && !/^\d{10}$/.test(mobile)) {
+      showToast('Please enter a valid 10-digit mobile number');
+      return;
+    }
+    
+    // Save user data to localStorage
+    try {
+      const userData = { name, email, mobile, loginTime: new Date().toISOString() };
+      localStorage.setItem('suraksha_user', JSON.stringify(userData));
+      
+      showToast(`Welcome, ${name}!`);
+      
+      // Close the modal
+      const loginModalEl = document.getElementById('loginModal');
+      if (loginModalEl) {
+        const loginModalInstance = bootstrap.Modal.getInstance(loginModalEl);
+        if (loginModalInstance) {
+          loginModalInstance.hide();
+        }
+      }
+      
+      // Reset form
+      setTimeout(() => {
+        document.getElementById('loginForm').reset();
+        // Update login button text
+        updateLoginButton(name);
+      }, 200);
+      
+    } catch (error) {
+      console.error('Error saving user data:', error);
+      showToast('Error saving user data');
+    }
+  });
+
+  // Load saved user data on startup
+  loadUserData();
 
   document.getElementById('langDropdown')?.addEventListener('click', (e) => {
     const opt = e.target.closest('.lang-opt');
