@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Safety Assistant - AI Fraud Risk Detection</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+        <div class="logo-circle"><i class="bi bi-shield-check"></i></div>
+        <span class="fw-bold fs-4" data-lang="title">Digital Safety Assistant</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse" aria-label="Toggle menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navCollapse">
+        <ul class="navbar-nav ms-auto align-items-center gap-2">
+          <li class="nav-item">
+            <div class="dropdown lang-dropdown">
+              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-lang="langLabel">Language</button>
+              <ul class="dropdown-menu" id="langDropdown">
+                <li><a class="dropdown-item lang-opt" href="javascript:void(0)" data-lang-val="en">English</a></li>
+                <li><a class="dropdown-item lang-opt" href="javascript:void(0)" data-lang-val="hi">हिन्दी</a></li>
+                <li><a class="dropdown-item lang-opt" href="javascript:void(0)" data-lang-val="te">తెలుగు</a></li>
+                <li><a class="dropdown-item lang-opt" href="javascript:void(0)" data-lang-val="ta">தமிழ்</a></li>
+                <li><a class="dropdown-item lang-opt" href="javascript:void(0)" data-lang-val="kn">ಕನ್ನಡ</a></li>
+                <li><a class="dropdown-item lang-opt" href="javascript:void(0)" data-lang-val="ml">മലയാളം</a></li>
+                <li><a class="dropdown-item lang-opt" href="javascript:void(0)" data-lang-val="bn">বাংলা</a></li>
+                <li><a class="dropdown-item lang-opt" href="javascript:void(0)" data-lang-val="mr">मराठी</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-secondary btn-lg rounded-circle" data-bs-toggle="modal" data-bs-target="#helpModal" aria-label="Help">
+              <i class="bi bi-question-circle"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="modal fade" id="helpModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" data-lang="helpTitle">How to use</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p data-lang="helpP1">1. Paste your SMS or WhatsApp message in the text box, or upload a screenshot.</p>
+          <p data-lang="helpP2">2. Click <strong>Analyze Message</strong> to check for scam risk.</p>
+          <p data-lang="helpP3">3. Review the risk score, highlighted suspicious parts, and safety tips.</p>
+          <p data-lang="helpP4">4. If in doubt, call Cybercrime Helpline 1930 immediately.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-4">
+    <section id="homeSection" class="section section-enter">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <h1 class="display-5 fw-bold text-center mb-3" data-lang="headline">Check if a message is a scam</h1>
+          <p class="text-center fs-5 text-muted mb-4" data-lang="subheadline">Paste an SMS/WhatsApp message or upload a screenshot.</p>
+
+          <div class="card card-custom p-4 mb-4">
+            <textarea id="messageInput" class="form-control textarea-large mb-3" placeholder="Paste SMS or Message Text Here…" data-lang-placeholder="pastePlaceholder"></textarea>
+            <div class="d-flex justify-content-between mb-3">
+              <span class="text-muted small"><span data-lang="charCount">Characters:</span> <span id="charCount">0</span></span>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button class="btn btn-primary btn-primary-custom" id="btnAnalyze" aria-label="Analyze message for scam risk">
+                <i class="bi bi-search me-2"></i><span data-lang="analyze">Analyze Message</span>
+              </button>
+              <button class="btn btn-secondary-custom" id="btnSpeak" aria-label="Speak message - voice input">
+                <i class="bi bi-mic me-2"></i><span data-lang="speak">Speak Message</span>
+              </button>
+              <button class="btn btn-outline-secondary btn-secondary-custom" id="btnUploadOCR" aria-label="Upload screenshot for OCR">
+                <i class="bi bi-image me-2"></i><span data-lang="uploadOCR">Upload Screenshot (OCR)</span>
+              </button>
+              <span class="upload-preview small text-success ms-2" id="ocrPreview"></span>
+              <input type="file" id="ocrFileInput" accept="image/*" class="d-none">
+            </div>
+            <p class="small text-muted mb-0" data-lang="tip">Tip: Never share OTP or UPI PIN.</p>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <div class="trust-badge">
+                <i class="bi bi-lightbulb text-primary fs-4"></i>
+                <div class="fw-semibold" data-lang="trust1">Explainable</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="trust-badge">
+                <i class="bi bi-lightning text-success fs-4"></i>
+                <div class="fw-semibold" data-lang="trust2">Fast</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="trust-badge">
+                <i class="bi bi-people text-primary fs-4"></i>
+                <div class="fw-semibold" data-lang="trust3">Rural Friendly</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="fw-semibold mb-2">Trending UPI Scams</p>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="chip-sample chip-trending" data-sample="upi">Fake UPI collect</span>
+            <span class="chip-sample chip-trending" data-sample="upi_refund">Fake refund link</span>
+            <span class="chip-sample chip-trending" data-sample="upi_electricity">Electricity bill scam</span>
+            <span class="chip-sample chip-trending" data-sample="upi_sim">SIM upgrade / KYC</span>
+            <span class="chip-sample chip-trending" data-sample="upi_bank">Bank block threat</span>
+            <span class="chip-sample chip-trending" data-sample="upi_fake_payment">Fake payment approve</span>
+          </div>
+          <p class="fw-semibold mb-2" data-lang="trySample">Other sample scams:</p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="chip-sample" data-sample="job">Job scam</span>
+            <span class="chip-sample" data-sample="lottery">Lottery scam</span>
+            <span class="chip-sample" data-sample="phishing">Phishing/KYC scam</span>
+            <span class="chip-sample" data-sample="investment">Investment scam</span>
+            <span class="chip-sample" data-sample="courier">Courier scam</span>
+            <span class="chip-sample" data-sample="loan">Loan scam</span>
+            <span class="chip-sample" data-sample="matrimonial">Matrimonial scam</span>
+            <span class="chip-sample" data-sample="crypto">Crypto scam</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultsSection" class="section">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="row g-4 mb-4">
+            <div class="col-md-4">
+              <div class="card card-custom p-4 text-center">
+                <div class="gauge-container mb-2">
+                  <div class="gauge-ring" id="gaugeRing"></div>
+                  <div class="gauge-inner">
+                    <span class="gauge-value" id="gaugeValue">0</span>
+                    <small data-lang="scamProb">Scam Probability</small>
+                  </div>
+                </div>
+                <span class="risk-pill" id="riskPill">SAFE</span>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card card-custom p-4">
+                <h5 data-lang="fraudType">Fraud Type Detected</h5>
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-circle bg-danger bg-opacity-10 p-3">
+                    <i class="bi bi-exclamation-triangle-fill text-danger fs-3" id="fraudIcon"></i>
+                  </div>
+                  <div>
+                    <h4 id="fraudTypeLabel">-</h4>
+                    <span class="badge bg-warning text-dark" id="confidenceBadge">-</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-custom p-4 mb-4">
+            <h5 data-lang="highlightedMsg">Highlighted Message</h5>
+            <div id="highlightedMessage" class="p-3 bg-light rounded border" style="font-size: 1.1rem; white-space: pre-wrap; word-break: break-word;"></div>
+          </div>
+
+          <div class="card card-custom p-4 mb-4">
+            <h5 data-lang="whyFlagged">Why this was flagged</h5>
+            <ul id="reasonsList" class="mb-4"></ul>
+            <h6 data-lang="scoreBreakdown">Score breakdown</h6>
+            <div id="scoreBreakdown"></div>
+          </div>
+
+          <div class="card card-custom p-4 mb-4">
+            <h5 data-lang="preventive">Preventive Guidance</h5>
+            <ul id="tipsList"></ul>
+            <h6 class="mt-3" data-lang="doNow">Do now checklist</h6>
+            <div id="checklistDiv"></div>
+          </div>
+
+          <div class="card card-custom p-4 mb-4 border-danger">
+            <h5 class="text-danger" data-lang="emergency">Emergency Help</h5>
+            <a href="tel:1930" class="btn emergency-btn mb-2 w-100" aria-label="Call Cybercrime Helpline 1930">
+              <i class="bi bi-telephone-fill me-2"></i><span data-lang="call1930">Call Cybercrime Helpline: 1930</span>
+            </a>
+            <a href="https://cybercrime.gov.in" target="_blank" rel="noopener" class="btn btn-outline-danger btn-lg w-100 mb-2">
+              <i class="bi bi-globe me-2"></i><span data-lang="reportOnline">Report on cybercrime.gov.in</span>
+            </a>
+            <p class="small text-muted mb-0" data-lang="emergencyNote">If money is deducted, act immediately.</p>
+          </div>
+
+          <div class="card card-custom p-4 mb-4">
+            <h5 data-lang="copyShare">Copy / Share Report</h5>
+            <textarea id="reportText" class="form-control mb-3" rows="8" readonly></textarea>
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-primary" id="btnCopyReport">
+                <i class="bi bi-clipboard me-2"></i><span data-lang="copyReport">Copy Report</span>
+              </button>
+              <button class="btn btn-outline-primary" id="btnShareReport">
+                <i class="bi bi-share me-2"></i><span data-lang="share">Share</span>
+              </button>
+              <button class="btn btn-outline-secondary" id="btnDownloadReport">
+                <i class="bi bi-download me-2"></i><span data-lang="download">Download Report</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-primary btn-primary-custom" id="btnAnalyzeAnother">
+              <i class="bi bi-arrow-repeat me-2"></i><span data-lang="analyzeAnother">Analyze Another Message</span>
+            </button>
+            <button class="btn btn-secondary-custom" id="btnSaveHistory">
+              <i class="bi bi-save me-2"></i><span data-lang="saveHistory">Save to History</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="awarenessSection" class="section">
+      <h2 class="text-center mb-4" data-lang="awarenessTitle">Awareness / Learn</h2>
+      <ul class="nav nav-tabs justify-content-center mb-4" id="awarenessTabs">
+        <li class="nav-item"><a class="nav-link active" href="#" data-tab="trendingUpi">Trending UPI Scams</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-tab="common">Common Scams</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-tab="vs">Scam vs Legit</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" data-tab="tips">Safety Tips</a></li>
+      </ul>
+      <div id="awarenessContent"></div>
+    </section>
+
+    <section id="historySection" class="section">
+      <h2 class="text-center mb-4" data-lang="historyTitle">History & Trending</h2>
+      <div id="historyList"></div>
+    </section>
+  </div>
+
+  <footer class="footer-custom">
+    <div class="container text-center">
+      <p class="mb-1"><strong>Digital Safety Assistant</strong> – AI-Based Fraud Risk Detection</p>
+      <p class="mb-1 small">Call Cybercrime Helpline: <a href="tel:1930">1930</a> | Report: <a href="https://cybercrime.gov.in" target="_blank" rel="noopener">cybercrime.gov.in</a></p>
+      <p class="mb-0 small text-muted">Never share OTP, UPI PIN, or passwords. Stay safe.</p>
+    </div>
+  </footer>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

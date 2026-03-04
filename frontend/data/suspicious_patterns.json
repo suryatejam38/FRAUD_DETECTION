@@ -1,0 +1,54 @@
+[
+    {
+        "pattern": "\\bOTP\\b|\\bUPI\\s*PIN\\b|\\bPIN\\b(?!\\s*code)",
+        "weight": 25
+    },
+    {
+        "pattern": "upi|collect|approve|request\\s+of\\s*Rs",
+        "weight": 15
+    },
+    {
+        "pattern": "bit\\.ly|tinyurl|http[s]?://",
+        "weight": 30
+    },
+    {
+        "pattern": "urgent|immediate|hurry|act\\s+now|within\\s+\\d+\\s*hours?",
+        "weight": 20
+    },
+    {
+        "pattern": "\\bKYC\\b|\\bverif[yi]",
+        "weight": 20
+    },
+    {
+        "pattern": "winner|won|congratulations|lucky\\s*draw",
+        "weight": 25
+    },
+    {
+        "pattern": "job|salary|registration\\s*fee|pay\\s+Rs",
+        "weight": 20
+    },
+    {
+        "pattern": "\\d{10}@\\w+|@paytm|@ybl|@okaxis",
+        "weight": 20
+    },
+    {
+        "pattern": "guaranteed\\s*returns|earn\\s*\\d+%|investment|min\\s*deposit|crypto",
+        "weight": 25
+    },
+    {
+        "pattern": "parcel|customs|duty|release.*pay",
+        "weight": 22
+    },
+    {
+        "pattern": "pre-approved|processing\\s*fee|loan|no\\s*documents",
+        "weight": 20
+    },
+    {
+        "pattern": "matrimonial|shaadi|NRI|gift\\s*transfer",
+        "weight": 18
+    },
+    {
+        "pattern": "bitcoin|btc|wallet|double\\s*your",
+        "weight": 25
+    }
+]

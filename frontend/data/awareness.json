@@ -1,0 +1,220 @@
+{
+    "trendingUpi": [
+        {
+            "icon": "bi-1-circle-fill",
+            "title": "Fake UPI Collect Request",
+            "desc": "Scammers send fake 'collect request' SMS. Approving allows them to pull money from your account.",
+            "flags": [
+                "Unknown sender",
+                "Urgent approve",
+                "bit.ly links"
+            ]
+        },
+        {
+            "icon": "bi-2-circle-fill",
+            "title": "Refund / Cashback Links",
+            "desc": "Fake Amazon, Flipkart, bank refund messages with malicious links. Never click – go to app directly.",
+            "flags": [
+                "Refund ready",
+                "Claim now",
+                "UPI PIN asked"
+            ]
+        },
+        {
+            "icon": "bi-3-circle-fill",
+            "title": "Electricity / Bill Payment",
+            "desc": "Fake disconnection threats. Real billers use official apps. Never pay via SMS links.",
+            "flags": [
+                "Pay before X PM",
+                "Disconnection",
+                "OTP for payment"
+            ]
+        },
+        {
+            "icon": "bi-4-circle-fill",
+            "title": "SIM Upgrade / KYC Fraud",
+            "desc": "Fake Airtel/Jio messages. Your SIM won't be deactivated via SMS. Use official app/store only.",
+            "flags": [
+                "SIM upgrade",
+                "KYC link",
+                "OTP to verify"
+            ]
+        },
+        {
+            "icon": "bi-5-circle-fill",
+            "title": "Bank Account Block Threat",
+            "desc": "Fake HDFC, SBI, etc. saying account will freeze. Banks never ask for OTP/PIN via SMS links.",
+            "flags": [
+                "Account blocked",
+                "Verify now",
+                "Share OTP"
+            ]
+        },
+        {
+            "icon": "bi-6-circle-fill",
+            "title": "Fake Payment Received",
+            "desc": "You get 'payment received' SMS, then a fake 'approve merchant' link. Scammers steal UPI PIN.",
+            "flags": [
+                "Payment received",
+                "Approve request",
+                "PIN needed"
+            ]
+        }
+    ],
+    "common": [
+        {
+            "icon": "bi-phone",
+            "title": "UPI Scams",
+            "desc": "Fake collect requests, fake payment links.",
+            "flags": [
+                "Collect/approve",
+                "Unknown sender",
+                "Urgent links"
+            ]
+        },
+        {
+            "icon": "bi-briefcase",
+            "title": "Job Scams",
+            "desc": "Fake job offers asking for registration fees.",
+            "flags": [
+                "Registration fee",
+                "Upfront payment",
+                "Too good salary"
+            ]
+        },
+        {
+            "icon": "bi-gift",
+            "title": "Lottery Scams",
+            "desc": "You won a prize you never entered.",
+            "flags": [
+                "Processing fee",
+                "Urgent claim",
+                "Random number"
+            ]
+        },
+        {
+            "icon": "bi-shield",
+            "title": "KYC/Phishing",
+            "desc": "Fake bank messages with links to steal OTP.",
+            "flags": [
+                "Account frozen",
+                "KYC link",
+                "OTP request"
+            ]
+        },
+        {
+            "icon": "bi-graph-up-arrow",
+            "title": "Investment Scams",
+            "desc": "Guaranteed returns, Ponzi schemes.",
+            "flags": [
+                "Guaranteed returns",
+                "Limited slots",
+                "Unknown platform"
+            ]
+        },
+        {
+            "icon": "bi-box-seam",
+            "title": "Courier Scams",
+            "desc": "Fake customs duty for parcel release.",
+            "flags": [
+                "Customs duty",
+                "Parcel held",
+                "Pay to release"
+            ]
+        },
+        {
+            "icon": "bi-bank",
+            "title": "Loan Scams",
+            "desc": "Pre-approved loans with upfront fees.",
+            "flags": [
+                "Processing fee",
+                "No documents",
+                "Instant approval"
+            ]
+        },
+        {
+            "icon": "bi-heart",
+            "title": "Matrimonial Scams",
+            "desc": "Fake profiles asking for money/OTP.",
+            "flags": [
+                "NRI profile",
+                "Gift transfer",
+                "OTP request"
+            ]
+        },
+        {
+            "icon": "bi-currency-bitcoin",
+            "title": "Crypto Scams",
+            "desc": "Double your crypto, fake wallets.",
+            "flags": [
+                "Double returns",
+                "Send BTC first",
+                "Guaranteed"
+            ]
+        }
+    ],
+    "vs": [
+        {
+            "icon": "bi-x-circle",
+            "title": "Scam: Unknown number",
+            "legit": "Legit: Official sender ID"
+        },
+        {
+            "icon": "bi-x-circle",
+            "title": "Scam: Asks for OTP/PIN",
+            "legit": "Legit: Never asks via SMS"
+        },
+        {
+            "icon": "bi-x-circle",
+            "title": "Scam: Urgent pressure",
+            "legit": "Legit: Gives time to verify"
+        },
+        {
+            "icon": "bi-x-circle",
+            "title": "Scam: Payment/links",
+            "legit": "Legit: No upfront fees"
+        },
+        {
+            "icon": "bi-x-circle",
+            "title": "Scam: Short links",
+            "legit": "Legit: Official URLs"
+        },
+        {
+            "icon": "bi-x-circle",
+            "title": "Scam: Too good offers",
+            "legit": "Legit: Realistic terms"
+        }
+    ],
+    "tips": [
+        {
+            "icon": "bi-1-circle",
+            "title": "Verify sender",
+            "desc": "Check if the number is from a known source."
+        },
+        {
+            "icon": "bi-2-circle",
+            "title": "Never share OTP/PIN",
+            "desc": "No bank will ask for these via SMS."
+        },
+        {
+            "icon": "bi-3-circle",
+            "title": "Don't click links",
+            "desc": "Type the official URL yourself."
+        },
+        {
+            "icon": "bi-4-circle",
+            "title": "Call 1930",
+            "desc": "Cybercrime helpline – call if you suspect."
+        },
+        {
+            "icon": "bi-5-circle",
+            "title": "Report",
+            "desc": "Report scams on cybercrime.gov.in."
+        },
+        {
+            "icon": "bi-6-circle",
+            "title": "Educate others",
+            "desc": "Share awareness with family."
+        }
+    ]
+}

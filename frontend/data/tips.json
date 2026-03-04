@@ -1,0 +1,72 @@
+{
+    "upi": [
+        "Never approve UPI collect requests from unknown numbers.",
+        "Check sender ID – banks use official shortcodes.",
+        "Do not click links in UPI messages.",
+        "Disable auto-debit in your UPI app.",
+        "If unsure, call your bank directly."
+    ],
+    "job": [
+        "Legitimate companies never ask for registration fees.",
+        "Verify company on official website before paying.",
+        "Do not share bank details for 'job confirmation'.",
+        "Be wary of WFH offers with upfront payment.",
+        "Report such messages to cybercrime.gov.in."
+    ],
+    "lottery": [
+        "You cannot win a lottery you did not enter.",
+        "No legitimate lottery asks for processing fees.",
+        "Do not send money to claim 'prizes'.",
+        "Block and report such numbers immediately.",
+        "Share this with family to spread awareness."
+    ],
+    "phishing": [
+        "Banks never ask for OTP/PIN via links or calls.",
+        "Do not click KYC links in SMS – go to bank app directly.",
+        "Check URL – fake sites often have typos.",
+        "Enable 2FA and use strong passwords.",
+        "Report to 1930 if you shared any details."
+    ],
+    "investment": [
+        "No legitimate investment guarantees fixed high returns.",
+        "Verify SEBI registration before investing.",
+        "Never invest via unknown links or WhatsApp.",
+        "Be wary of 'limited slots' pressure.",
+        "Report to 1930 or SEBI if cheated."
+    ],
+    "courier": [
+        "India Post/Courier never asks for customs via SMS links.",
+        "Verify tracking on official website only.",
+        "Do not pay customs for unsolicited parcels.",
+        "Call the courier company directly to verify.",
+        "Report such messages to 1930."
+    ],
+    "loan": [
+        "Banks never offer instant loan without verification.",
+        "No legitimate lender asks processing fee upfront.",
+        "Never share OTP or bank details for 'approval'.",
+        "Check RBI list of registered NBFCs.",
+        "Report loan fraud to 1930."
+    ],
+    "matrimonial": [
+        "Never share bank details or OTP with unknown matches.",
+        "Be wary of NRI profiles asking for money.",
+        "Verify identity through video call first.",
+        "Report fake profiles to the matrimonial site.",
+        "Share this with family using such sites."
+    ],
+    "crypto": [
+        "No scheme can 'guarantee' doubling crypto.",
+        "Verify platforms on SEBI/RBI lists.",
+        "Never send crypto to unknown wallets.",
+        "Beware of 'limited spots' urgency.",
+        "Report crypto fraud to 1930."
+    ],
+    "others": [
+        "Never share OTP, PIN, or passwords with anyone.",
+        "Verify any request through official channels.",
+        "When in doubt, do not act – call 1930.",
+        "Educate family members about common scams.",
+        "Keep your phone and apps updated."
+    ]
+}

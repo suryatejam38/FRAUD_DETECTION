@@ -1,0 +1,42 @@
+{
+    "upi": {
+        "label": "UPI Fraud",
+        "icon": "bi-credit-card-2-front"
+    },
+    "job": {
+        "label": "Job Scam",
+        "icon": "bi-briefcase"
+    },
+    "lottery": {
+        "label": "Lottery Scam",
+        "icon": "bi-trophy"
+    },
+    "phishing": {
+        "label": "Phishing / KYC Scam",
+        "icon": "bi-shield-exclamation"
+    },
+    "investment": {
+        "label": "Investment Scam",
+        "icon": "bi-graph-up-arrow"
+    },
+    "courier": {
+        "label": "Courier Scam",
+        "icon": "bi-box-seam"
+    },
+    "loan": {
+        "label": "Loan Scam",
+        "icon": "bi-bank"
+    },
+    "matrimonial": {
+        "label": "Matrimonial Scam",
+        "icon": "bi-heart"
+    },
+    "crypto": {
+        "label": "Crypto Scam",
+        "icon": "bi-currency-bitcoin"
+    },
+    "others": {
+        "label": "Others",
+        "icon": "bi-exclamation-triangle"
+    }
+}

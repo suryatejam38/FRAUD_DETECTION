@@ -1,0 +1,16 @@
+{
+    "upi": "Your UPI collect request of Rs 5000 from 9876543210@paytm has been received. Approve now by clicking: https://bit.ly/upi-approve-now. OTP valid for 5 mins only. Do not share.",
+    "upi_refund": "Amazon: Your refund of Rs 2499 is ready! Click to claim: bit.ly/ref-claim. Enter UPI PIN to receive. Valid 2 hrs only.",
+    "upi_electricity": "State Electricity Board: Pay pending bill Rs 1850 now. Click: https://pay-elec.in/bill. OTP required. Pay before 6 PM to avoid disconnection.",
+    "upi_sim": "Airtel: SIM upgrade required. Complete KYC: bit.ly/airtel-kyc. Enter OTP sent to your number. Failure may deactivate your connection.",
+    "upi_bank": "HDFC Bank: Your a/c will be blocked. Verify now: https://hdfc-verify.net. Share OTP to restore. Act immediately.",
+    "upi_fake_payment": "Payment of Rs 1500 received from 98xxx. Approve merchant request to complete: https://pay-approve.in. UPI PIN needed.",
+    "job": "Congratulations! You are selected for WFH Data Entry job. Salary Rs 25000/month. Pay registration fee Rs 999 to confirm. Reply YES to get bank details. Limited seats!",
+    "lottery": "CONGRATULATIONS! You have WON Rs 25 Lakh in Lucky Draw! Claim before 24 hours. Send processing fee Rs 5000 to account 1234567890. Call 9876543210 now!",
+    "phishing": "URGENT: Your bank a/c will be frozen in 2 hours. Complete KYC verification now: https://fake-bank-kyc.com. Enter OTP and UPI PIN to verify. Do not delay!",
+    "investment": "Earn 3% daily returns! Join our crypto investment scheme. Min deposit Rs 5000. Guaranteed returns. Limited slots. Register now: https://invest-now.in",
+    "courier": "Your parcel from Mumbai Customs is held. Pay customs duty Rs 2500 to release. Click here: bit.ly/customs-pay. Act within 24 hours or parcel will be destroyed.",
+    "loan": "Pre-approved personal loan of Rs 5 Lakh! Processing fee Rs 999 only. Reply LOAN to 9876543210. Money in 2 hours. No documents needed. Limited offer!",
+    "matrimonial": "Hi! I liked your profile on Shaadi.com. I am NRI doctor. Please share your bank details for gift transfer. Send OTP to verify. Love, Priya.",
+    "crypto": "Double your Bitcoin in 7 days! Send 0.01 BTC to wallet XYZ. Get 0.02 BTC back. 100% guaranteed. Join 10,000+ investors. Hurry, last 50 spots!"
+}
